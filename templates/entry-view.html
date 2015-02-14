@@ -1,0 +1,28 @@
+<ion-header-bar class="bar-light">
+    <button class="button button-icon" ng-click="toggleCars()">
+        <i class="icon ion-navicon"></i>
+    </button>
+    <h1 class="title">{{activeCar.name}}</h1>
+    <button class="button button-icon" ng-click="newEntry()">
+        <i class="icon ion-compose"></i>
+    </button>
+</ion-header-bar>
+<ion-content>
+    <div class="list">
+        <div class="item item-divider">
+            <div class="row header">
+                <div class="col col-33">Datum</div>
+                <div class="col col-33">Ziel</div>
+                <div class="col col-33">Beschreibung</div>
+            </div>
+        </div>
+        <ion-item ng-repeat="fahrt in activeCar.fahrten">
+            <div class="row">
+                <div class="col col-33">{{fahrt.date | date: 'dd.MM.yyyy'}}</div>
+                <div class="col col-33">{{fahrt.destination}}</div>
+                <div class="col col-33">{{fahrt.notes}}</div>
+            </div>
+        </ion-item>
+    </div>
+    <button class="button" ng-click="resetStorage()"></button>
+</ion-content>

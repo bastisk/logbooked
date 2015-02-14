@@ -1,0 +1,39 @@
+<div class="modal">
+    <ion-header-bar class="bar-secondary">
+        <h1 class="title">Neuer Eintrag</h1>
+        <button class="button button-clear button-positive" ng-click="closeNewEntry()">Abbrechen</button>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="createEntry(entry)">
+            <div class="list">
+                 <label class="item item-input">
+                    <span class="input-label">Ziel</span>
+                    <input type="text" placeholder="" ng-model="entry.destination">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Kilometerstand</span>
+                    <input type="text" placeholder="" ng-model="entry.km">
+                </label>
+                  <label class="item item-input">
+                    <span class="input-label">Notizen</span>
+                    <input type="text" placeholder="" ng-model="entry.notes">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Datum</span>
+                    <input type="date" ng-model="entry.date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Startzeitpunkt</span>
+                    <input type="time" ng-model="entry.starttime">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Endzeitpunkt</span>
+                    <input type="time" ng-model="entry.endtime">
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Eintrag hinzufügen</button>
+            </div>
+        </form>
+    </ion-content>
+</div>

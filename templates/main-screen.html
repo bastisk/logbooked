@@ -1,0 +1,15 @@
+<ion-header-bar class="bar-light">
+    <h1 class="title">Optionen</h1>
+    <button class="button button-icon ion-plus" ng-click="newCar()">
+    </button>
+</ion-header-bar>
+<ion-content>
+    <ion-list>
+        <div class="item item-divider">Deine Fahrzeuge</div>
+        <ion-item ng-repeat="car in cars" ng-click="selectCar(car, $index)" ng-class="{active: activeCar == car}">
+            {{car.name}}
+        </ion-item>
+        <div class="item item-divider">Tools</div>
+        <ion-item> PDF exportieren</ion-item>
+    </ion-list>
+</ion-content>
