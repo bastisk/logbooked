@@ -1,16 +1,24 @@
 angular.module('logbooked', ['ionic'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-  .state('index', {
-    url: '/',
-    templateUrl: 'main-screen.html'
-  })
-  .state('entries', {
-    url: '/entries',
-    templateUrl: 'entryviewer.html'
-  });
-$urlRouterProvider.otherwise('/');
+        .state('index', {
+            url: '/',
+            templateUrl: 'main-screen.html'
+        })
+        .state('fahrtdetails', {
+            url: '/details',
+            templateUrl: 'detailfahrt.html'
+        })
+        .state('welcome', {
+            url: '/welcome',
+            templateUrl: 'welcome.html'
+        })
+        .state('entries', {
+            url: '/entries',
+            templateUrl: 'entryviewer.html'
+        });
+    $urlRouterProvider.otherwise('/');
 
 })
 
@@ -44,17 +52,18 @@ $urlRouterProvider.otherwise('/');
 })
 
 
-.controller('FahrtenCtrl', function ($scope, $timeout, $ionicModal, Cars, $ionicSideMenuDelegate, $state) {
+.controller('FahrtenCtrl', function ($scope, $timeout, $ionicModal, Cars, $ionicSideMenuDelegate, $state, $ionicNavBarDelegate) {
 
     var createCar = function (carName) {
         var newCar = Cars.newCar(carName);
         $scope.cars.push(newCar);
         Cars.save($scope.cars);
         $scope.selectCar(newCar, $scope.cars.length - 1);
+        $state.go('index');
     }
 
-    $scope.resetStorage = function(){
-    window.localStorage.clear();
+    $scope.resetStorage = function () {
+        window.localStorage.clear();
     }
 
     $scope.cars = Cars.all();
@@ -74,6 +83,11 @@ $urlRouterProvider.otherwise('/');
         $state.go('entries');
     }
 
+    $scope.selectFahrt = function (fahrt, index) {
+        $scope.activeCar.activeFahrt = fahrt;
+        $state.go('fahrtdetails');
+    }
+
     $ionicModal.fromTemplateUrl("templates/new-entry.html", function (modal) {
         $scope.entryModal = modal;
     }, {
@@ -81,12 +95,15 @@ $urlRouterProvider.otherwise('/');
         animation: 'slide-in-up'
     });
 
-    $scope.showEditor = function(index) {
-    }
+    $scope.showEditor = function (index) {}
 
-    $scope.backtomain = function() {
+    $scope.backtomain = function () {
         $state.go('index');
     }
+    $scope.backtofahrten = function () {
+        $state.go('entries');
+    }
+
     $scope.createEntry = function (entry) {
         if (!$scope.activeCar || !entry) {
             return;
@@ -113,18 +130,15 @@ $urlRouterProvider.otherwise('/');
     };
 
 
-    $timeout(function() {
-        if($scope.cars.length == 0) {
-            while(true) {
+    $timeout(function () {
+        if ($scope.cars.length == 0) {
+            while (true) {
                 var carName = prompt('Bitte einen Fahrzeugnamen eingeben:');
-                if(carName) {
+                if (carName) {
                     createCar(carName);
                     break;
                 }
             }
         }
     });
-
-
-
 });
