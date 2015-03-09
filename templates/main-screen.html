@@ -4,10 +4,13 @@
     </button>
 </ion-header-bar>
 <ion-content>
-    <ion-list>
+    <ion-list can-swipe="true">
         <div class="item item-divider">Deine Fahrzeuge</div>
         <ion-item ng-repeat="car in cars" ng-click="selectCar(car, $index)" ng-class="{active: activeCar == car}">
             {{car.name}}
+            <ion-option-button class="button-assertive" ng-click="deleteCarEntry(item)">
+            Loeschen
+          </ion-option-button>
         </ion-item>
         <div class="item item-divider">Tools</div>
         <ion-item> PDF exportieren</ion-item>

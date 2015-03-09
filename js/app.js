@@ -110,7 +110,7 @@ angular.module('logbooked', ['ionic'])
         }
         $scope.activeCar.fahrten.push({
             date: entry.date,
-            km: entry.km,
+            km: entry.km_end,
             notes: entry.notes,
             destination: entry.destination,
             starttime: entry.starttime,
@@ -120,6 +120,21 @@ angular.module('logbooked', ['ionic'])
         Cars.save($scope.cars);
         entry.title = "";
     };
+
+
+    $scope.deleteFahrtEntry = function (index) {
+        if(!$scope.activeCar || !entry) {
+            return;
+        }
+        $scope.activeCar.fahrten.splice(index, 1);
+    }
+
+     $scope.deleteCarEntry = function (index) {
+        if(!$scope.activeCar) {
+            return;
+        }
+        $scope.activeCar.splice(index, 1);
+    }
 
     $scope.newEntry = function () {
         $scope.entryModal.show();

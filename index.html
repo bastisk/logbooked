@@ -69,6 +69,9 @@
                     </div>
                     <ion-item ng-repeat="car in cars" ng-click="selectCar(car, $index)">
                         {{car.name}}
+                        <ion-option-button class="button-assertive" ng-click="deleteCarEntry(item)">
+                            Loeschen
+                        </ion-option-button>
                     </ion-item>
                 </ion-list>
                 <br>
